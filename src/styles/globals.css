@@ -82,10 +82,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-red-500 text-foreground;
   }
 }
 
 body{
   font-weight: 500;
+
 }
