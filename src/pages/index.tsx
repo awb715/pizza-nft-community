@@ -5,7 +5,7 @@ import { FadeIn } from "@/components/FadeIn";
 import Image from "next/image";
 import { useNFTCollectibles } from "@/lib/hooks/useNFTCollectibles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { profile } from "@/data/profile";
+import { projectInfo } from "@/data/profile";
 import { ConnectKitButton } from "connectkit";
 import { SendTransaction } from "@/components/SendTransaction";
 import {MyForm} from "@/components/nftForm";
@@ -54,7 +54,7 @@ const Page: React.FC = () => {
     loading: nftLoading,
     error: nftError,
     data: nfts,
-  } = useNFTCollectibles(profile.address);
+  } = useNFTCollectibles(projectInfo.address);
 
 
   //gets NFTs from address 
@@ -84,7 +84,7 @@ const Page: React.FC = () => {
           <div className="flex items-center flex-col mx-auto w-full mt-16 md:mt-32 justify-center px-2 md:px-8">
             <h1 className="font-bold mt-4 text-2xl text-white">
             🍕🍕
-              {profile?.name ?? ""}🍕🍕
+              {projectInfo?.name ?? ""}🍕🍕
             </h1>
             <p className="text-white text-center text-base my-8">
             Share your pizza cost in ETH ♢, BTC ₿, or USDC💲 and earn an NFT! <br></br><br></br> After that, discover what others paid for a slice!

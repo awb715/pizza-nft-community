@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 
 interface FormData {
-  field1: string;
-  field2: string;
-  field3: string;
-  field4: number;
+  place: string;
+  type: string;
+  currency: string;
+  amount: number;
 }
 
 const MyForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    field1: '',
-    field2: '',
-    field3: '',
-    field4: 0,
+    place: '',
+    type: '',
+    currency: '',
+    amount: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -29,10 +29,10 @@ const MyForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="myForm">
       <div>
         <label>Pizzeria Name:</label>
-        <select name="field1" value={formData.field1} onChange={handleChange}>
+        <select name="place" value={formData.place} onChange={handleChange}>
           <option value="">Select Option</option>
           <option value="1">Bitza Bounty Pizzeria</option>
           <option value="2">Crypto Crust Corner</option>
@@ -45,17 +45,17 @@ const MyForm: React.FC = () => {
 
       <div>
         <label>Pizza Type</label>
-        <select name="field2" value={formData.field2} onChange={handleChange}>
+        <select name="type" value={formData.type} onChange={handleChange}>
           <option value="">Select Option</option>
-          <option value="A">Cheese</option>
-          <option value="B">Mushroom</option>
-          <option value="C">Pepperoni</option>
+          <option value="Cheese">Cheese</option>
+          <option value="Mushroom">Mushroom</option>
+          <option value="Pepperoni">Pepperoni</option>
         </select>
       </div>
 
       <div>
         <label>Payment Currency:</label>
-        <select name="Payment Currency" value={formData.field3} onChange={handleChange}>
+        <select name="currency" value={formData.currency} onChange={handleChange}>
           <option value="">Select Option</option>
           <option value="ETH">ETH</option>
           <option value="BTC">BTC</option>
@@ -67,8 +67,8 @@ const MyForm: React.FC = () => {
         <label>Payment Amount:</label>
         <input
           type="number"
-          name="field4"
-          value={formData.field4}
+          name="amount"
+          value={formData.amount}
           onChange={handleChange}
           placeholder="Enter amount"
         />
@@ -80,3 +80,41 @@ const MyForm: React.FC = () => {
 };
 
 export { MyForm};
+
+// <style jsx>{`
+//   .myForm {
+//     max-width: 400px;
+//     margin: 0 auto;
+//     padding: 20px;
+//     border: 1px solid #ccc;
+//     border-radius: 5px;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//     color: yellow;
+//   }
+
+//   label {
+//     display: block;
+//     margin-bottom: 8px;
+//   }
+
+//   select,
+//   input {
+//     width: 100%;
+//     padding: 8px;
+//     margin-bottom: 16px;
+//     box-sizing: border-box;
+//   }
+
+//   button {
+//     background-color: #0070f3;
+//     color: #fff;
+//     padding: 10px;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//   }
+
+//   button:hover {
+//     background-color: #0056b3;
+//   }
+// `}</style>;
