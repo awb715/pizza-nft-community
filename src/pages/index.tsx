@@ -9,6 +9,7 @@ import { profile } from "@/data/profile";
 import { ConnectKitButton } from "connectkit";
 import { SendTransaction } from "@/components/SendTransaction";
 import {MyForm} from "@/components/nftForm";
+import { Button } from "@/components/ui/button";
 
 function LinkCard({
   href,
@@ -46,12 +47,17 @@ function LinkCard({
   );
 }
 
+//use to determine if NFT holder
 const Page: React.FC = () => {
+
   const {
     loading: nftLoading,
     error: nftError,
     data: nfts,
   } = useNFTCollectibles(profile.address);
+
+
+  //gets NFTs from address 
   const processAllNfts = () => {
     let nftData: any = [];
     if (!nfts[0]) return [];
@@ -70,52 +76,33 @@ const Page: React.FC = () => {
 
   return (
     <main>
-
-
       <div className="fixed top-3 right-3 z-10">
- 
         <ConnectKitButton />
       </div>
       <Wrapper>
         <FadeIn>
           <div className="flex items-center flex-col mx-auto w-full mt-16 md:mt-32 justify-center px-2 md:px-8">
-
             <h1 className="font-bold mt-4 text-2xl text-white">
             🍕🍕
               {profile?.name ?? ""}🍕🍕
             </h1>
             <p className="text-white text-center text-base my-8">
-            Share your pizza cost in ETH or Satoshi and earn an NFT! <br></br>Then, discover what others paid for a slice!
-</p>
-
-show  mint (form) or random restaurant (button that updates text) / see data option (button to new page)
-
-then,
-        <MyForm></MyForm>
+            Share your pizza cost in ETH ♢, BTC ₿, or USDC💲 and earn an NFT! <br></br><br></br> After that, discover what others paid for a slice!
+</p>       
             <Tabs defaultValue="links" className="w-full">
               <TabsList className="flex items-center justify-center">
-                <TabsTrigger value="links">Links</TabsTrigger>
-                <TabsTrigger value="nfts">NFTs</TabsTrigger>
-                <TabsTrigger value="projects">Projects</TabsTrigger>
-                <TabsTrigger value="send">Buy an NFT</TabsTrigger>
-                <TabsTrigger value="NFT-check"> NFT Check</TabsTrigger>
+                <TabsTrigger value="form">Share your Pizza Price!</TabsTrigger>
+                <TabsTrigger value="nfts">Your "Slices" </TabsTrigger>
+                <TabsTrigger value="random">Hungry For Some Pizza?</TabsTrigger>
+                <TabsTrigger value="data">Other People's slices. </TabsTrigger>
               </TabsList>
               <TabsContent
-                value="links"
+                value="form"
                 className="w-full mt-8 flex flex-col items-center justify-center"
               >
-                {profile.links.map((link: any, index: number) => (
-                  <LinkCard
-                    key={link.name}
-                    href={link.url}
-                    title={link.name}
-                    image="/LinkDefaultIcon.svg"
-                  />
-                ))}
+ <MyForm></MyForm>
               </TabsContent>
-              <TabsContent
-                value="nfts"
-                className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto"
+              <TabsContent value="nfts" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto"
               >
                 {nftLoading && <p>Loading...</p>}
                 {allNfts.map((nft: any) => {
@@ -133,24 +120,13 @@ then,
                   )
                 })}
               </TabsContent>
-              <TabsContent
-                value="projects"
-                className="w-full mt-8 flex flex-col items-center justify-center"
-              >
-                {profile.projects.map((project: any) => (
-                  <LinkCard
-                    key={project.name}
-                    href={project.url}
-                    title={project.name}
-                    image="/LinkDefaultIcon.svg"
-                  />
-                ))}
+              <TabsContent value="random" className="w-full mt-8 flex flex-col items-center justify-center">
+                Click the button below and we'll randomly select pizza place for you to try!
+                <br></br><br></br>
+                <Button>Let's eat!</Button>
               </TabsContent>
               <TabsContent value="send">
                 <SendTransaction />
-              </TabsContent>
-              <TabsContent value='NFT-check'>
-                    MINT NFT Here
               </TabsContent>
             </Tabs>
           </div>
@@ -161,3 +137,4 @@ then,
 };
 
 export default Page;
+
