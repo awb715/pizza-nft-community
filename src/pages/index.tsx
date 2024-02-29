@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profile } from "@/data/profile";
 import { ConnectKitButton } from "connectkit";
 import { SendTransaction } from "@/components/SendTransaction";
+import {MyForm} from "@/components/nftForm";
 
 function LinkCard({
   href,
@@ -69,41 +70,35 @@ const Page: React.FC = () => {
 
   return (
     <main>
-      <Image
-        alt="background-image"
-        src="/Banner.svg"
-        height="380"
-        width="2000"
-        className="fixed z-[-1] top-0 left-0 object-cover md:h-96 min-h-48 w-full"
-      />
+
+
       <div className="fixed top-3 right-3 z-10">
+ 
         <ConnectKitButton />
       </div>
       <Wrapper>
         <FadeIn>
           <div className="flex items-center flex-col mx-auto w-full mt-16 md:mt-32 justify-center px-2 md:px-8">
-            <div className="h-40 w-40 md:h-72 md:w-72">
-              <img
-                className="rounded-full h-40 w-40 md:h-72  md:w-72 border border-[12px] border-[rgba(255,255,255,0.04)]"
-                alt="Picture of the author"
-                src={profile?.imageUrl ?? ""}
-                width={288}
-                height={288}
-              />
-            </div>
+
             <h1 className="font-bold mt-4 text-2xl text-white">
-              {profile?.name ?? ""}
+            🍕🍕
+              {profile?.name ?? ""}🍕🍕
             </h1>
-            <h3 className="text-base text-white">@{profile?.name ?? ""}</h3>
             <p className="text-white text-center text-base my-8">
-              {profile?.bio ?? ""}
-            </p>
+            Share your pizza cost in ETH or Satoshi and earn an NFT! <br></br>Then, discover what others paid for a slice!
+</p>
+
+show  mint (form) or random restaurant (button that updates text) / see data option (button to new page)
+
+then,
+        <MyForm></MyForm>
             <Tabs defaultValue="links" className="w-full">
               <TabsList className="flex items-center justify-center">
                 <TabsTrigger value="links">Links</TabsTrigger>
                 <TabsTrigger value="nfts">NFTs</TabsTrigger>
                 <TabsTrigger value="projects">Projects</TabsTrigger>
-                <TabsTrigger value="send">Donate</TabsTrigger>
+                <TabsTrigger value="send">Buy an NFT</TabsTrigger>
+                <TabsTrigger value="NFT-check"> NFT Check</TabsTrigger>
               </TabsList>
               <TabsContent
                 value="links"
@@ -153,6 +148,9 @@ const Page: React.FC = () => {
               </TabsContent>
               <TabsContent value="send">
                 <SendTransaction />
+              </TabsContent>
+              <TabsContent value='NFT-check'>
+                    MINT NFT Here
               </TabsContent>
             </Tabs>
           </div>
