@@ -10,42 +10,9 @@ import { ConnectKitButton } from "connectkit";
 import { SendTransaction } from "@/components/SendTransaction";
 import {MyForm} from "@/components/nftForm";
 import { Button } from "@/components/ui/button";
+import { useAccount } from 'wagmi';
 
-function LinkCard({
-  href,
-  title,
-  image,
-}: {
-  href: string;
-  title: string;
-  image?: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center p-1 w-full hover:scale-105 transition-all bg-purple rounded-xl mb-3 max-w-md"
-    >
-      <div className="flex items-center text-center max-h-12 h-12 w-full">
-        <div className="w-4 h-4 ml-6">
-          {image && (
-            <Image
-              className="rounded-sm"
-              alt={title}
-              src={image}
-              width={16}
-              height={16}
-            />
-          )}
-        </div>
-        <h2 className="flex justify-center items-center font-semibold w-full text-white -ml-10">
-          {title}
-        </h2>
-      </div>
-    </a>
-  );
-}
+
 
 //use to determine if NFT holder
 const Page: React.FC = () => {
@@ -57,6 +24,8 @@ const Page: React.FC = () => {
   } = useNFTCollectibles(projectInfo.address);
 
 
+  const account = useAccount();
+  console.log(account.address)
   //gets NFTs from address 
   const processAllNfts = () => {
     let nftData: any = [];

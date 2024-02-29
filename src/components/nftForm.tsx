@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+import { useAccount } from 'wagmi'
+
+
+
+
 interface FormData {
   place: string;
   type: string;
@@ -26,9 +31,12 @@ const MyForm: React.FC = () => {
     e.preventDefault();
     // Handle form submission logic here
     console.log('Form data submitted:', formData);
+
   };
 
+
   return (
+    
     <form onSubmit={handleSubmit} className="myForm">
       <div>
         <label>Pizzeria Name:</label>
@@ -44,6 +52,7 @@ const MyForm: React.FC = () => {
       </div>
 
       <div>
+        
         <label>Pizza Type</label>
         <select name="type" value={formData.type} onChange={handleChange}>
           <option value="">Select Option</option>
