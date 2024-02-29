@@ -20,7 +20,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        comic: ['Comic Sans MS', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
