@@ -5,7 +5,7 @@ import { FadeIn } from "@/components/FadeIn";
 import Image from "next/image";
 import { useNFTCollectibles } from "@/lib/hooks/useNFTCollectibles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { projectInfo } from "@/data/profile";
+import { projectInfo,linkMap} from "@/data/project-summary";
 import { ConnectKitButton } from "connectkit";
 import { SendTransaction } from "@/components/SendTransaction";
 import {MyForm} from "@/components/nftForm";
@@ -85,9 +85,10 @@ const Page: React.FC = () => {
             <h1 className="font-bold mt-4 text-2xl text-white">
             🍕🍕
               {projectInfo?.name ?? ""}🍕🍕
+           
             </h1>
             <p className="text-white text-center text-base my-8">
-            Share your pizza cost in ETH ♢, BTC ₿, or USDC💲 and earn an NFT! <br></br><br></br> After that, discover what others paid for a slice!
+            Share your pizza cost in ETH, BTC, or USDC and earn an NFT! <br></br><br></br> After that, discover what others paid for a slice!
 </p>       
             <Tabs defaultValue="links" className="w-full">
               <TabsList className="flex items-center justify-center">
