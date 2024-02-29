@@ -1,7 +1,7 @@
 const projectInfo = {
   name: "CryptoSlices",
   bio: "How much ETH / Satoshi did a slice of pizza cost you?",
-  address: "0xc0163E58648b247c143023CFB26C2BAA42C9d9A9",
+  address: "0xE66400BBD0bD5c300aA129C64B929A0872dEDE90",
   links: [
     {
       name: "Cheese",
