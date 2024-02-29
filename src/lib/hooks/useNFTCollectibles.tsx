@@ -3,17 +3,14 @@ import { Network } from "alchemy-sdk";
 import { AlchemyMultichainClient } from "@/lib/alchemy-multichain-client";
 
 const config = {
-  apiKey: process.env.NEXT_PUBLIC_ALCHEMY_MAINNET,
-  network: Network.ETH_MAINNET,
+  apiKey: process.env.NEXT_PUBLIC_ALCHEMY_BASE,
+  network: Network.BASE_SEPOLIA,
 };
 
 const overrides = {
-  [Network.MATIC_MAINNET]: {
-    apiKey: process.env.NEXT_PUBLIC_ALCHEMY_MATIC,
-  },
-  [Network.OPT_MAINNET]: {  
-    apiKey: process.env.NEXT_PUBLIC_ALCHEMY_OPTIMISM,
-  },
+  [Network.BASE_SEPOLIA]: {
+    apiKey: process.env.NEXT_PUBLIC_ALCHEMY_BASE_SEPOLIA ,
+  }
 }
 
 const alchemy = new AlchemyMultichainClient(config, overrides);
@@ -58,16 +55,9 @@ const fetchAlchemyAllData = async (owner: string): Promise<Array<any>> => {
 };
 
 const fetchAlchemyData = async (owner: string) => {
-  const mainnetNfts = await alchemy
-  .forNetwork(Network.ETH_MAINNET)
-  .nft.getNftsForOwner(owner as string, { pageSize: 5 })
-
-  const maticNfts = await alchemy
-  .forNetwork(Network.MATIC_MAINNET)
+  const baseSepoliaNfts = await alchemy
+  .forNetwork(Network.BASE_SEPOLIA)
   .nft.getNftsForOwner(owner as string, { pageSize: 5 });
 
-  const optimismNfts = await alchemy
-  .forNetwork(Network.OPT_MAINNET)
-  .nft.getNftsForOwner(owner as string, { pageSize: 5 });
-  return [{ mainnetNfts, maticNfts, optimismNfts }]
+  return [{ baseSepoliaNfts }]
 };
