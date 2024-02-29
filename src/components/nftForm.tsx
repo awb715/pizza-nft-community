@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
-import { useAccount } from 'wagmi'
-
-
+import { useAccount,useWriteContract } from 'wagmi'
+import { NFT_ABI } from '@/abi/objects';
 
 
 interface FormData {
