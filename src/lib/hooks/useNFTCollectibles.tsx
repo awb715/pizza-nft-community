@@ -100,10 +100,11 @@ const fetchNFTDataFromAPI = async (contract: string): Promise<NFTCollectible[]> 
         image,
         attributes: parsedAttributes,
     };
+
 });
 
 // Now parsedNFTs is an array containing the parsed data for all NFTs
-console.log(parsedNFTs);
+return parsedNFTs
 
 };
 
