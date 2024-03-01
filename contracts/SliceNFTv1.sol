@@ -38,22 +38,27 @@ contract SliceNFT is ERC721URIStorage, Ownable {
         uint256 tokenId = _nextTokenId++;
         
         // Define IPFS URLs for each pizza type
-        string memory ipfsUrl;
-        if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("supreme"))) {
-            ipfsUrl = "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmbMQpNZFrsPQqUwiK1wBUKiJ8Ep7EjF2TwH85ikR16fW5";
-        } else if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("pepperoni"))) {
-            ipfsUrl = "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmQdEPS2MCKAra8E4nwfs37Kh88wM1cStxUFC7WZm97eyV";
-        } else if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("mushroom"))) {
-            ipfsUrl = "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmYEqTEx96E9iusMj7WDVjHsmqPBRcsrKamUAuMXBGhpEG";
-        } else {
-            revert("Invalid pizza type");
-        }
+        string memory metadataUri = string(abi.encodePacked(
+        '{',
+            '"name": "SliceNFT #', Strings.toString(tokenId), '", ',
+            '"description": "A delicious slice of ', pizzaType, ' pizza.", ',
+            '"image": "', _getIpfsUrlForPizzaType(pizzaType), '", ',
+            '"attributes": [',
+                '{ "trait_type": "Recipient", "value": "', Strings.toHexString(uint256(uint160(recipient)), 20), '" },',
+                '{ "trait_type": "Place", "value": "', Strings.toString(place), '" },',
+                '{ "trait_type": "Pizza Type", "value": "', pizzaType, '" },',
+                '{ "trait_type": "Currency", "value": "', currency, '" },',
+                '{ "trait_type": "Amount", "value": "', Strings.toString(amount), '" },',
+                '{ "trait_type": "Minting Time", "value": "', Strings.toString(block.timestamp), '" }',
+            ']',
+        '}'
+    ));
 
-        _setTokenURI(tokenId, ipfsUrl); 
+        _setTokenURI(tokenId, metadataUri); 
         _safeMint(recipient, tokenId);
 
 
-
+        //emit NftMetadata(pizza, etc)
 
         nftData memory newData = nftData({
             place: place, 
@@ -67,7 +72,21 @@ contract SliceNFT is ERC721URIStorage, Ownable {
         tokenData[tokenId] = newData;
     }
 
-        function getTokenData(uint256 tokenId) public view returns (nftData memory) {
+
+        // Function to return IPFS URL for pizza types
+    function _getIpfsUrlForPizzaType(string memory pizzaType) private pure returns (string memory) {
+        if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("supreme"))) {
+            return "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmbMQpNZFrsPQqUwiK1wBUKiJ8Ep7EjF2TwH85ikR16fW5";
+        } else if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("pepperoni"))) {
+            return "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmQdEPS2MCKAra8E4nwfs37Kh88wM1cStxUFC7WZm97eyV";
+        } else if (keccak256(abi.encodePacked(pizzaType)) == keccak256(abi.encodePacked("mushroom"))) {
+            return "https://gray-odd-lynx-187.mypinata.cloud/ipfs/QmYEqTEx96E9iusMj7WDVjHsmqPBRcsrKamUAuMXBGhpEG";
+        } else {
+            revert("Invalid pizza type");
+        }
+        }
+
+    function getTokenData(uint256 tokenId) public view returns (nftData memory) {
         require(ownerOf(tokenId) != address(0), "Token ID does not exist.");
         return tokenData[tokenId];
     }
