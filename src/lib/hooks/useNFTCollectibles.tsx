@@ -1,89 +1,110 @@
-import { useEffect, useState } from "react";
+//this is used to get NFTs on a contract
+interface Contract {
+  address: string;
+  name: string;
+  symbol: string;
+  totalSupply: number | null;
+  tokenType: string;
+  contractDeployer: string;
+  deployedBlockNumber: number;
+  openSeaMetadata: {
+    floorPrice: number | null;
+    collectionName: string | null;
+    collectionSlug: string | null;
+    safelistRequestStatus: string | null;
+    imageUrl: string | null;
+    description: string | null;
+    externalUrl: string | null;
+    twitterUsername: string | null;
+    discordUrl: string | null;
+    bannerImageUrl: string | null;
+    lastIngestedAt: string | null;
+  };
+  isSpam: boolean | null;
+  spamClassifications: string[];
+}
 
 interface Image {
-  cachedUrl: string;
+  cachedUrl: string | null;
   thumbnailUrl: string | null;
   pngUrl: string | null;
   contentType: string | null;
   size: number | null;
-  originalUrl: string;
+  originalUrl: string | null;
 }
 
 interface Raw {
   tokenUri: string;
-  metadata: {
-    name: string;
-    description: string;
-    image: string;
-    properties: {
-      number: number;
-      name: string;
-    };
-  };
+  metadata: Record<string, unknown>;
   error: string | null;
 }
 
-interface NFTData {
+interface Mint {
+  mintAddress: string | null;
+  blockNumber: number | null;
+  timestamp: string | null;
+  transactionHash: string | null;
+}
+
+interface NFT {
+  contract: Contract;
+  tokenId: string;
+  tokenType: string;
+  name: string | null;
+  description: string | null;
+  tokenUri: string | null;
   image: Image;
   raw: Raw;
+  collection: unknown | null;
+  mint: Mint;
+  owners: unknown | null;
+  timeLastUpdated: string;
 }
 
-interface FetchNFTResponse {
-  data: NFTData[];
+interface NFTResponse {
+  nfts: NFT[];
+  pageKey: string | null;
 }
-
-type Maybe<T> = T | null;
-
-const useNFTCollectibles = (
-  owner: string
-): {
-  data: any;
-  loading: boolean;
-  error: Maybe<string>;
-} => {
-  const [data, setData] = useState<Array<any>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Maybe<string>>(null);
-
-  useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetchNFTDataFromAPI(owner);
-        setData(response);
-      } catch (err) {
-        console.error("error", error);
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (owner) {
-      load();
-    }
-  }, [owner]);
-
-  return { data, loading, error };
-};
 
 const fetchNFTDataFromAPI = async (contract: string): Promise<NFTCollectible[]> => {
   const response = await fetch(
-    `https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_ALCHEMY_BASE}/getNFTsForContract?contractAddress=${contract}&withMetadata=true`
+    `https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_ALCHEMY_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${contract}&withMetadata=true`
   );
+
+  console.log(response)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch NFT data: ${response.statusText}`);
   }
 
-  const responseData: FetchNFTResponse = await response.json();
+  const responseData: NFTResponse = await response.json();
 
-  return responseData.data.map((item) => ({
-    image:item.image,
-    raw:(item.raw)
-  }));
+  const parsedNFTs = responseData.nfts.map((nft) => {
+    // Parse tokenUri string to JSON
+    const tokenUriData = JSON.parse(nft.raw.tokenUri);
+
+    // Extract the required properties
+    const { name, description, image, attributes } = tokenUriData;
+
+    // attributes is an array, you can loop through it if needed
+    const parsedAttributes = attributes.map((attribute) => {
+        const { trait_type, value } = attribute;
+        // Do something with trait_type and value
+        return { trait_type, value };
+    });
+
+    // Return the parsed data for each NFT including image
+    return {
+        name,
+        description,
+        image,
+        attributes: parsedAttributes,
+    };
+});
+
+// Now parsedNFTs is an array containing the parsed data for all NFTs
+console.log(parsedNFTs);
+
 };
 
-export { useNFTCollectibles };
-
-`https://base-sepolia.g.alchemy.com/nft/v3/5r7wAQwo9rHN7uSuNKSVTdvwyn8gLzpp/getNFTsForContract?contractAddress=QmQdEPS2MCKAra8E4nwfs37Kh88wM1cStxUFC7WZm97eyV&withMetadata=true`
+export {fetchNFTDataFromAPI};
