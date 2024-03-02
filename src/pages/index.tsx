@@ -52,7 +52,7 @@ const Page: React.FC = () => {
               </TabsContent>
               <TabsContent value="nfts" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto">   
                <NFTGallery contractAddress={projectInfo.nftAddress} userAddress={account.address}></NFTGallery></TabsContent>
-              <TabsContent value="data" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto">T
+              <TabsContent value="data" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto">
                 <YourSlices address={account.address}></YourSlices>
               </TabsContent>
               <TabsContent value="random" className="w-full mt-8 flex flex-col items-center justify-center">
