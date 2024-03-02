@@ -1,3 +1,13 @@
+ETHDENVER 2024 HACKATHON
+
+Loom Video: https://www.loom.com/share/e252cf14dc0a40c2aec0bd2abca3e082?sid=6029eca0-b374-4ce9-b07c-afbf6865e148
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
