@@ -593,8 +593,6 @@ const NFT_ABI =[
 ]
 
 //add newone here
-
-
 const RandomnessReceiver_ABI = [
 	{
 		"inputs": [],
@@ -720,5 +718,5 @@ const RandomnessReceiver_ABI = [
 
 
 
-export {NFT_ABI}
+export {NFT_ABI, RandomnessReceiver_ABI}
 
