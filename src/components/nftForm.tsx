@@ -1,23 +1,7 @@
 import React, { useState } from 'react';
-import { useAccount,useWriteContract } from 'wagmi'
+import {BaseError, useAccount,useWriteContract } from 'wagmi'
 import { NFT_ABI } from '@/abi/objects';
 import {projectInfo} from '../data/project-summary';
-
-
-// const contractConfig = {
-//   contract: ('0xb5954589190E143767120323970e3440A4454918' as `Ox${string}`),
-//   abi:NFT_ABI
-
-};
-// //update to mint function
-//   const { data: ownerOf } = useWriteContract({
-//     ...contractConfig,
-//     //call function in smart contract
-//     functionName: 'ownerOf',
-//   //no arguments for nft contract
-//     args:[0],
-//     //nft 0 is looked for in the function call, since the ownerOF accepts a parameter of nftID
-//   })
 
 
 interface FormData {
@@ -35,7 +19,8 @@ const MyForm: React.FC = () => {
     amount: 0,
   });
 
-  const {data:hash, writeContract} = useWriteContract()
+  const {data:hash, error, writeContract} = useWriteContract()
+  const address = useAccount().address;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setFormData({
@@ -46,7 +31,32 @@ const MyForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
+    // Handle form submission logic here  
+
+    const pizzaArray = [
+      address,
+      parseInt(formData.place, 10),
+      formData.type,
+      formData.currency,
+      formData.amount
+    ];
+
+    console.log(pizzaArray)
+    try{
+      writeContract({
+        address:"0xb5954589190e143767120323970e3440a4454918",
+        abi: NFT_ABI,
+        functionName:'safeMint',
+        args:pizzaArray//['0x41285462d2B1c7C5631B49bC6F57BfF78D4C0c2C',1,'Mushroom','BTC',100]
+      })
+    }
+    catch(e){
+      console.log(e)
+    }
+   
+
+    console.log(hash)
+
     console.log('Form data submitted:', formData);
 
   };
@@ -101,7 +111,12 @@ const MyForm: React.FC = () => {
       </div>
 
       <button type="submit">Submit</button>
+      {error && ( 
+        <div>Error: {(error as BaseError).shortMessage || error.message}</div> 
+      )} 
     </form>
+
+    
   );
 };
 
