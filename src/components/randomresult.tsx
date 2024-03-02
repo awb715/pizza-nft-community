@@ -1,59 +1,69 @@
 import React, { useState } from 'react';
-import { useWriteContract } from 'wagmi';
+import { useWriteContract,useReadContract } from 'wagmi';
 import { RandomnessReceiver_ABI } from '../abi/objects';
 import { pizzaPlaces } from '@/data/project-summary';
 import { parseEther } from 'viem';
 import { projectInfo } from '@/data/project-summary';
 
+
 import { watchContractEvent } from '@wagmi/core'
 //import {config} from '../pages/_app'
-
 
 
 function RandomPizzaPlaceComponent() {
   const { writeContract } = useWriteContract();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [randomData, setRandomData] = useState(null);
-  const [chosenRestaurant, setChosenRestaurant] = useState(null);
+  const [randomData, setRandomData] = useState(0);
+  const [chosenRestaurant, setChosenRestaurant] = useState('');
 
-  const getRandomNumber = async () => {
-    setIsLoading(true);
+  // const result=  useReadContract({
+  //   abi:RandomnessReceiver_ABI,
+  //   address: '0xc5642Fcf15D5915054F1679F366c861052720ca2',
+  // functionName: 'getRandomNumber',
+  // })
 
-    try {
-//et your desired gas price (in wei)
-      const transaction = await writeContract({
-        address: '0x1d709a7c76a8af1ecbd1bbe9388fba366610f311',
-        abi: RandomnessReceiver_ABI,
-        functionName: 'requestRandomnessTestPreset',
-        args: [],
-        value: parseEther('.002') // Equivalent to 0.002 ETH
-      });
-      setRandomData(random);
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
-    }
-  };
+  // console.log(result, ' here')
+ 
+  const getRandomNumber = async () => {}
+    // setIsLoading(true);}
+//     try {
+// //et your desired gas price (in wei)
+//       const transaction = writeContract({
+//         address: '0xc5642Fcf15D5915054F1679F366c861052720ca2',
+//         abi: RandomnessReceiver_ABI,
+//         functionName: 'requestRandomnessTestPreset',
+//         args: [],
+//         value: parseEther('.002') // Equivalent to 0.002 ETH
+//       });
 
+      // const randomResult = useReadContract({
+      //   abi:RandomnessReceiver_ABI,
+      //   address: '0xc5642Fcf15D5915054F1679F366c861052720ca2',
+      // functionName: 'getRandomNumber',
+      // })
+  //     setRandomData(Math.floor(Math.random() * 6) + 1);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     setError(error);
+  //     setIsLoading(false);
+  //   }
+  // };
   const handleButtonClick = () => {
     // Check if data has been fetched successfully
-    if (!randomData) {
-      return; // Prevent action if data not available
-    }
-
-    const randomIndex = randomData % Object.keys(pizzaPlaces).length; // Ensure index stays within dictionary range
-    const selectedRestaurant = pizzaPlaces[randomIndex + 1]; // Adjust for 1-based indexing
-
+    // if (!randomData) {
+    //   console.log('returned')
+    //   return; // Prevent action if data not available
+    // }
+    // Ensure index stays within dictionary range
+    const rn = Math.floor(Math.random() * 6) + 1
+    console.log(rn)
+    const selectedRestaurant = pizzaPlaces[rn]; 
+    console.log(selectedRestaurant)// Adjust for 1-based indexing
     // Set the chosen restaurant in the state
     setChosenRestaurant(selectedRestaurant);
-
     // Optional: Perform further actions with the selected restaurant (e.g., display on screen)
-    console.log("Let's eat at", selectedRestaurant);
   };
-
-
   return (
     <div>
       {isLoading ? (
@@ -62,16 +72,16 @@ function RandomPizzaPlaceComponent() {
         <p>Error fetching randomness: {error.message}</p>
       ) : (
         <>
-          <button onClick={getRandomNumber}>Click me to find a new pizza place to eat at!</button>
+          <button onClick={handleButtonClick}>Click me to find a new pizza place to eat at!</button>
           <br></br><br></br>
-          <button onClick={handleButtonClick} disabled={!randomData}>
+          {/* <button onClick={handleButtonClick} disabled={!randomData}>
             Let's eat!
-          </button>
-          {chosenRestaurant && <p>Selected Pizza Place: {chosenRestaurant}</p>}
+          </button> */}
+          {chosenRestaurant && <p>Let's eat at {chosenRestaurant}</p>}
         </>
       )}
     </div>
   );
-}
+      }
 
 export { RandomPizzaPlaceComponent };

@@ -687,7 +687,7 @@ const NFT_ABI = [
 ]
 
 //add newone here
-const RandomnessReceiver_ABI = [
+const RandomnessReceiver_ABI =[
 	{
 	 "inputs": [],
 	 "stateMutability": "nonpayable",
@@ -744,27 +744,15 @@ const RandomnessReceiver_ABI = [
 	 "type": "event"
 	},
 	{
-	 "inputs": [
-	  {
-	   "internalType": "uint32",
-	   "name": "_numWords",
-	   "type": "uint32"
-	  },
-	  {
-	   "internalType": "uint32",
-	   "name": "_callbackGasLimit",
-	   "type": "uint32"
-	  }
-	 ],
-	 "name": "requestRandomnessTest",
-	 "outputs": [],
-	 "stateMutability": "payable",
-	 "type": "function"
-	},
-	{
 	 "inputs": [],
 	 "name": "requestRandomnessTestPreset",
-	 "outputs": [],
+	 "outputs": [
+	  {
+	   "internalType": "uint256",
+	   "name": "",
+	   "type": "uint256"
+	  }
+	 ],
 	 "stateMutability": "payable",
 	 "type": "function"
 	},
@@ -783,12 +771,38 @@ const RandomnessReceiver_ABI = [
 	},
 	{
 	 "inputs": [],
+	 "name": "getRandomNumber",
+	 "outputs": [
+	  {
+	   "internalType": "uint256",
+	   "name": "",
+	   "type": "uint256"
+	  }
+	 ],
+	 "stateMutability": "view",
+	 "type": "function"
+	},
+	{
+	 "inputs": [],
 	 "name": "owner",
 	 "outputs": [
 	  {
 	   "internalType": "address",
 	   "name": "",
 	   "type": "address"
+	  }
+	 ],
+	 "stateMutability": "view",
+	 "type": "function"
+	},
+	{
+	 "inputs": [],
+	 "name": "randomNumber",
+	 "outputs": [
+	  {
+	   "internalType": "uint256",
+	   "name": "",
+	   "type": "uint256"
 	  }
 	 ],
 	 "stateMutability": "view",
