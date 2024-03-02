@@ -4,6 +4,11 @@ import { RandomnessReceiver_ABI } from '../abi/objects';
 import { pizzaPlaces } from '@/data/project-summary';
 import { parseEther } from 'viem';
 
+import { watchContractEvent } from '@wagmi/core'
+//import {config} from '../pages/_app'
+
+
+
 function RandomPizzaPlaceComponent() {
   const { writeContract } = useWriteContract();
   const [isLoading, setIsLoading] = useState(false);
@@ -15,17 +20,14 @@ function RandomPizzaPlaceComponent() {
     setIsLoading(true);
 
     try {
-      const gasLimit = 200000; // Set your desired gas limit
-      const gasPrice = 20000000000; // Set your desired gas price (in wei)
-
-      const random = await writeContract({
+//et your desired gas price (in wei)
+      const transaction = await writeContract({
         address: '0x1d709a7c76a8af1ecbd1bbe9388fba366610f311',
         abi: RandomnessReceiver_ABI,
         functionName: 'requestRandomnessTestPreset',
         args: [],
         value: parseEther('.002') // Equivalent to 0.002 ETH
       });
-
       setRandomData(random);
       setIsLoading(false);
     } catch (error) {
@@ -49,6 +51,7 @@ function RandomPizzaPlaceComponent() {
     // Optional: Perform further actions with the selected restaurant (e.g., display on screen)
     console.log("Let's eat at", selectedRestaurant);
   };
+
 
   return (
     <div>

@@ -32,6 +32,8 @@ const config = createConfig(
     appIcon: "🍕", // your app's icon, no bigger than 1024x1024px (max. 1MB)
   }),
 );
+
+
 export default function App({ Component, pageProps }: AppProps) {
 
   

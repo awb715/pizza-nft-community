@@ -67,6 +67,8 @@ interface NFTResponse {
 }
 
 const fetchNFTDataFromAPI = async (contract: string): Promise<NFTCollectible[]> => {
+
+  //console.log(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_ALCHEMY_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${contract}&withMetadata=true`)
   const response = await fetch(
     `https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_ALCHEMY_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${contract}&withMetadata=true`
   );
