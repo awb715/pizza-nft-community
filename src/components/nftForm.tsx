@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 import { useAccount,useWriteContract } from 'wagmi'
 import { NFT_ABI } from '@/abi/objects';
+import {projectInfo} from '../data/project-summary';
+
+
+// const contractConfig = {
+//   contract: ('0xb5954589190E143767120323970e3440A4454918' as `Ox${string}`),
+//   abi:NFT_ABI
+
+};
+// //update to mint function
+//   const { data: ownerOf } = useWriteContract({
+//     ...contractConfig,
+//     //call function in smart contract
+//     functionName: 'ownerOf',
+//   //no arguments for nft contract
+//     args:[0],
+//     //nft 0 is looked for in the function call, since the ownerOF accepts a parameter of nftID
+//   })
 
 
 interface FormData {
@@ -17,6 +34,8 @@ const MyForm: React.FC = () => {
     currency: '',
     amount: 0,
   });
+
+  const {data:hash, writeContract} = useWriteContract()
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setFormData({
