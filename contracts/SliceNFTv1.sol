@@ -34,7 +34,7 @@ contract SliceNFT is ERC721URIStorage, Ownable {
         uint256 amount
 
         //going to need to add image data based on
-    ) public onlyOwner {
+    ) public {
         uint256 tokenId = _nextTokenId++;
         
         // Define IPFS URLs for each pizza type
