@@ -16,7 +16,7 @@ const MyForm: React.FC = () => {
     place: '',
     type: '',
     currency: '',
-    amount: 0,
+    amount:0
   });
 
   const {data:hash, error, writeContract} = useWriteContract()
@@ -38,9 +38,9 @@ const MyForm: React.FC = () => {
       parseInt(formData.place, 10),
       formData.type,
       formData.currency,
-      formData.amount
+      parseInt(formData.amount,10)
     ];
-
+    console.log('hello')
     console.log(pizzaArray)
     try{
       writeContract({
@@ -83,9 +83,9 @@ const MyForm: React.FC = () => {
         <label>Pizza Type</label>
         <select name="type" value={formData.type} onChange={handleChange}>
           <option value="">Select Option</option>
-          <option value="Cheese">Cheese</option>
-          <option value="Mushroom">Mushroom</option>
-          <option value="Pepperoni">Pepperoni</option>
+          <option value="cheese">Cheese</option>
+          <option value="mushroom">Mushroom</option>
+          <option value="pepperoni">Pepperoni</option>
         </select>
       </div>
 
