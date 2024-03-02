@@ -44,7 +44,7 @@ const MyForm: React.FC = () => {
     console.log(pizzaArray)
     try{
       writeContract({
-        address:"0xb5954589190e143767120323970e3440a4454918",
+        address:'0xE98B08db344678cB512C62C3d1D0004aa58e8901',
         abi: NFT_ABI,
         functionName:'safeMint',
         args:pizzaArray//['0x41285462d2B1c7C5631B49bC6F57BfF78D4C0c2C',1,'Mushroom','BTC',100]

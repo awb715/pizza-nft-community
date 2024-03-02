@@ -13,7 +13,7 @@ import {MyForm} from "@/components/nftForm";
 import { Button } from "@/components/ui/button";
 import { useAccount } from 'wagmi';
 import { YourSlices } from "@/components/NFTLoaders/your-slices";
-
+import {RandomPizzaPlaceComponent} from '../components/randomresult';
 
 
 //use to determine if NFT holder
@@ -61,9 +61,11 @@ const Page: React.FC = () => {
       
           
               <TabsContent value="random" className="w-full mt-8 flex flex-col items-center justify-center">
-                Click the button below and we'll randomly select pizza place for you to try!
+                {/* Click the button below and we'll randomly select pizza place for you to try!
                 <br></br><br></br>
-                <Button>Let's eat!</Button>
+                <Button>Let's eat!</Button> */}
+                <RandomPizzaPlaceComponent></RandomPizzaPlaceComponent>
+
               </TabsContent>
               <TabsContent value="send">
                 <SendTransaction />
