@@ -1,5 +1,5 @@
 //contract ABI
-const NFT_ABI =[[
+const NFT_ABI = [
 	{
 		"inputs": [
 			{
@@ -684,7 +684,7 @@ const NFT_ABI =[[
 		"stateMutability": "view",
 		"type": "function"
 	}
-]]
+]
 
 //add newone here
 
@@ -697,7 +697,7 @@ const random_ABI = []
 export {NFT_ABI,random_ABI}
 
 
-const RandomnessReceiver_ABI = [[
+const RandomnessReceiver_ABI = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -817,4 +817,4 @@ const RandomnessReceiver_ABI = [[
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]]
+]
