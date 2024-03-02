@@ -39,9 +39,9 @@ const Page: React.FC = () => {
 </p>       
             <Tabs defaultValue="links" className="w-full">
               <TabsList className="flex items-center justify-center">
+              <TabsTrigger value="random">Hungry For Some Pizza?</TabsTrigger>
                 <TabsTrigger value="form">Share your Pizza Price!</TabsTrigger>
-                <TabsTrigger value="data">Your "Slices" </TabsTrigger>
-                <TabsTrigger value="random">Hungry For Some Pizza?</TabsTrigger>
+                <TabsTrigger value="data">Your "Slices"</TabsTrigger>
                 <TabsTrigger value="nfts">Other People's slices. </TabsTrigger>
               </TabsList>
               <TabsContent
@@ -56,9 +56,7 @@ const Page: React.FC = () => {
                 <YourSlices address={account.address}></YourSlices>
               </TabsContent>
               <TabsContent value="random" className="w-full mt-8 flex flex-col items-center justify-center">
-                {/* Click the button below and we'll randomly select pizza place for you to try!
-                <br></br><br></br>
-                <Button>Let's eat!</Button> */}
+
                 <RandomPizzaPlaceComponent></RandomPizzaPlaceComponent>
 
               </TabsContent>
