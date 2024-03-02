@@ -20,8 +20,6 @@ import {RandomPizzaPlaceComponent} from '../components/randomresult';
 const Page: React.FC = () => {
 
   const account = useAccount();
-  console.log(account.address)
-
 
   return (
     <main>
@@ -52,14 +50,11 @@ const Page: React.FC = () => {
               >
  <MyForm></MyForm>
               </TabsContent>
-              <TabsContent value="nfts" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto"
-              >   
+              <TabsContent value="nfts" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto">   
                <NFTGallery contractAddress={projectInfo.nftAddress}></NFTGallery></TabsContent>
               <TabsContent value="data" className="grid md:grid-cols-3 grid-cols-2 gap-3 max-w-96 place-self-center mx-auto">
-                <YourSlices address={account}></YourSlices>
+                <YourSlices address={account.address}></YourSlices>
               </TabsContent>
-      
-          
               <TabsContent value="random" className="w-full mt-8 flex flex-col items-center justify-center">
                 {/* Click the button below and we'll randomly select pizza place for you to try!
                 <br></br><br></br>

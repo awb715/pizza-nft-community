@@ -3,6 +3,7 @@ import { useWriteContract } from 'wagmi';
 import { RandomnessReceiver_ABI } from '../abi/objects';
 import { pizzaPlaces } from '@/data/project-summary';
 import { parseEther } from 'viem';
+import { projectInfo } from '@/data/project-summary';
 
 import { watchContractEvent } from '@wagmi/core'
 //import {config} from '../pages/_app'
