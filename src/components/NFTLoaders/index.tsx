@@ -41,7 +41,8 @@ const NFTGallery: React.FC<{ contractAddress: string }> = ({ contractAddress }) 
 	return (
 	  <div>
 		<h2>NFT Gallery</h2>
-		<div>
+		<br></br><br></br>
+		<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 		  {nftData && nftData.map((nft, index) => (
 			<SimpleNFTComponent key={index} nft={nft} />
 		  ))}
